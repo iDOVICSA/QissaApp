@@ -40,6 +40,9 @@ flutter:
     - family: Sen
       fonts:
         - asset: fonts/Sen-Regular.ttf
+    - family: playFair
+      fonts:
+        - asset: fonts/PlayfairDisplay-VariableFont_wght.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

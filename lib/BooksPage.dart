@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:qissa_app/Book.dart';
 
 class CarouselDemo extends StatefulWidget {
   CarouselDemo() : super();
@@ -12,115 +13,326 @@ class CarouselDemo extends StatefulWidget {
 
 class CarouselDemoState extends State<CarouselDemo> {
   int _current = 0;
-  List imgList = [
-    'assets/cover1.png',
-    'assets/cover2.jpg',
-    'assets/cover3.jpg',
-    'assets/cover4.jpg'
-  ];
+  List imgList = [];
+  void sayHello() {
+    imgList = [
+      'assets/cover1.png',
+      'assets/cover2.jpg',
+      'assets/cover3.jpg',
+      'assets/cover4.jpg',
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
+    sayHello();
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter a search term'),
-                ),
-                CarouselSlider(
-                    height: 300.0,
-                    initialPage: 0,
-                    onPageChanged: (index) {
-                      setState(() {
-                        _current = index;
-                      });
-                    },
-                    items: imgList.map((imgUrl) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: 200,
-                            margin: EdgeInsets.symmetric(horizontal: 10.0),
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            child: Image.asset(imgUrl, fit: BoxFit.fill),
-                          );
-                        },
-                      );
-                    }).toList()),
-                SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  width: 360,
-                  decoration: new BoxDecoration(
-                      color: Color(0xff2b5740),
-                      borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(32.0),
-                        topRight: const Radius.circular(32.0),
-                      )),
-                  child: Column(
+            backgroundColor: Color(0xFF100b20),
+            body: Container(
+              child: new Column(
+                children: <Widget>[
+                  new Padding(padding: new EdgeInsets.fromLTRB(0, 0, 0, 0)),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Text(
-                          'Book Descritption :',
-                          style: TextStyle(
-                              color: Color(0xfffe7762),
-                              fontSize: 21,
-                              fontFamily: 'Sen'),
-                          textAlign: TextAlign.left,
-                        ),
+                      IconButton(
+                        icon: Icon(Icons.menu),
+                        color: Colors.white,
+                        onPressed: () {},
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                          padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                          child: Text(
-                            'Author :',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          )),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                          padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                          child: Text(
-                            'Publisher :',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          )),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                          padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                          child: Text(
-                            'Publishing Year :',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          )),
-                      SizedBox(
-                        height: 105,
+                      IconButton(
+                        icon: Icon(Icons.search),
+                        color: Colors.white,
+                        onPressed: () {},
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
+                  new SizedBox(
+                    height: 21,
+                  ),
+                  new Row(
+                    children: <Widget>[
+                      Expanded(
+                          child: CarouselSlider(
+                              initialPage: 0,
+                              height: 250,
+                              onPageChanged: (index) {
+                                setState(() {
+                                  _current = index;
+                                });
+                              },
+                              items: imgList.map((imgUrl) {
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                      child: FlatButton(
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              new BorderRadius.circular(10.0),
+                                          child: Image(
+                                            fit: BoxFit.fill,
+                                            image: AssetImage(imgUrl),
+                                            width: 180.0,
+                                            height: 250.0,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          print("Holaa amigo ");
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              }).toList())),
+                    ],
+                  ),
+                  new SizedBox(
+                    height: 21,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        'Best Seller',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Sen',
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Expanded(
+                      child: ListView(
+                    children: <Widget>[
+                      FlatButton(
+                          child: Row(
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: new BorderRadius.circular(10.0),
+                                child: Image(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage('assets/cover2.jpg'),
+                                  width: 90.0,
+                                  height: 120.0,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Wrap(
+                                direction: Axis.vertical,
+                                children: <Widget>[
+                                  Text(
+                                    "An Ocean of Minutes",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21,
+                                        fontFamily: 'playFair'),
+                                  ),
+                                  Text(
+                                    "THEA LIM",
+                                    style: TextStyle(
+                                        color: Colors.white30,
+                                        fontFamily: 'Sen'),
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "19.99 e",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellow,
+                                      ),
+                                      Text(
+                                        " 4.8",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      Text(
+                                        "  (1256)",
+                                        style: TextStyle(
+                                          color: Colors.white30,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          onPressed: () {
+                            print('CLiquer Iciic');
+                          }),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      FlatButton(
+                          child: Row(
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: new BorderRadius.circular(10.0),
+                                child: Image(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage('assets/cover2.jpg'),
+                                  width: 90.0,
+                                  height: 120.0,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Wrap(
+                                direction: Axis.vertical,
+                                children: <Widget>[
+                                  Text(
+                                    "An Ocean of Minutes",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21,
+                                        fontFamily: 'playFair'),
+                                  ),
+                                  Text(
+                                    "THEA LIM",
+                                    style: TextStyle(
+                                        color: Colors.white30,
+                                        fontFamily: 'Sen'),
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "19.99 e",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellow,
+                                      ),
+                                      Text(
+                                        " 4.8",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      Text(
+                                        "  (1256)",
+                                        style: TextStyle(
+                                          color: Colors.white30,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          onPressed: () {
+                            print('CLiquer22 Iciic');
+                          }),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      FlatButton(
+                          child: Row(
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: new BorderRadius.circular(10.0),
+                                child: Image(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage('assets/cover2.jpg'),
+                                  width: 90.0,
+                                  height: 120.0,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Wrap(
+                                direction: Axis.vertical,
+                                children: <Widget>[
+                                  Text(
+                                    "An Ocean of Minutes",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21,
+                                        fontFamily: 'playFair'),
+                                  ),
+                                  Text(
+                                    "THEA LIM",
+                                    style: TextStyle(
+                                        color: Colors.white30,
+                                        fontFamily: 'Sen'),
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "19.99 e",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellow,
+                                      ),
+                                      Text(
+                                        " 4.8",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      Text(
+                                        "  (1256)",
+                                        style: TextStyle(
+                                          color: Colors.white30,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          onPressed: () {
+                            print('CLiquer Iciic');
+                          }),
+                    ],
+                  ))
+                ],
+              ),
+            )),
       ),
     );
   }
