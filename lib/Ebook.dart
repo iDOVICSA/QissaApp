@@ -52,7 +52,7 @@ class EbookState extends State<Ebook> {
                     booksList[_current].imgLink,
                   ),
                   width: 180.0,
-                  height: 250.0,
+                  height: 220.0,
                 ),
               ),
               Padding(padding: new EdgeInsets.all(12.3)),
@@ -144,7 +144,7 @@ class EbookState extends State<Ebook> {
                 ],
               ),
               new Container(
-                height: 140.0,
+                height: 120.0,
 
                 // color: Colors.black,
                 child: ListView.builder(
@@ -158,7 +158,7 @@ class EbookState extends State<Ebook> {
                           booksList[index].imgLink,
                           //    color: Colors.black,
                           width: 80.0,
-                          height: 140.0,
+                          height: 120.0,
                         ),
                         onTap: () {
                           setState(() {
