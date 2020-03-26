@@ -12,9 +12,11 @@ class CarouselDemo extends StatefulWidget {
 }
 
 class CarouselDemoState extends State<CarouselDemo> {
+  int currentElementInListView = 0;
   int _current = 0;
   List imgList = [];
-  void sayHello() {
+  void initImgList() {
+    // List of books covers links to display in caroussel
     imgList = [
       'assets/cover1.png',
       'assets/cover2.jpg',
@@ -23,9 +25,29 @@ class CarouselDemoState extends State<CarouselDemo> {
     ];
   }
 
+  List<Book> bookList = [];
+  void initBooksLIst() {
+    // List of books to display on ListView
+    Book b1 = new Book("Rudyard kipling", "The Jungle Book", 19.99, 4.8, 2390,
+        'assets/cover3.jpg');
+    Book b2 = new Book(
+      "J.R.R tolkeien",
+      "The Hobbit",
+      32.99,
+      9.8,
+      8302,
+      'images/hobbit.jpg',
+    );
+    bookList.clear();
+    bookList.add(b1);
+    bookList.add(b2);
+  }
+
   @override
   Widget build(BuildContext context) {
-    sayHello();
+    initImgList();
+    initBooksLIst();
+
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
@@ -110,226 +132,97 @@ class CarouselDemoState extends State<CarouselDemo> {
                     height: 8,
                   ),
                   Expanded(
-                      child: ListView(
-                    children: <Widget>[
-                      FlatButton(
-                          child: Row(
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                child: Image(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage('assets/cover2.jpg'),
-                                  width: 90.0,
-                                  height: 120.0,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Wrap(
-                                direction: Axis.vertical,
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, indice) {
+                        return new Column(
+                          children: <Widget>[
+                            FlatButton(
+                              child: new Row(
                                 children: <Widget>[
-                                  Text(
-                                    "An Ocean of Minutes",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 21,
-                                        fontFamily: 'playFair'),
+                                  ClipRRect(
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0),
+                                    child: Image(
+                                      fit: BoxFit.fill,
+                                      image:
+                                          AssetImage(bookList[indice].imgLink),
+                                      width: 90.0,
+                                      height: 120.0,
+                                    ),
                                   ),
-                                  Text(
-                                    "THEA LIM",
-                                    style: TextStyle(
-                                        color: Colors.white30,
-                                        fontFamily: 'Sen'),
+                                  SizedBox(
+                                    width: 16,
                                   ),
-                                  Row(
+                                  Wrap(
+                                    direction: Axis.vertical,
                                     children: <Widget>[
                                       Text(
-                                        "19.99 e",
+                                        bookList[indice].titre,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.yellow,
+                                            fontSize: 21,
+                                            fontFamily: 'playFair'),
                                       ),
                                       Text(
-                                        " 4.8",
+                                        bookList[indice].auteur,
                                         style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        ),
+                                            color: Colors.white30,
+                                            fontFamily: 'Sen'),
                                       ),
-                                      Text(
-                                        "  (1256)",
-                                        style: TextStyle(
-                                          color: Colors.white30,
-                                          fontSize: 16,
-                                        ),
-                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Text(
+                                            bookList[indice].price.toString() +
+                                                " e",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
+                                          ),
+                                          SizedBox(
+                                            width: 40,
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.yellow,
+                                          ),
+                                          Text(
+                                            bookList[indice].mark.toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          Text(
+                                            "  " +
+                                                bookList[indice]
+                                                    .views
+                                                    .toString(),
+                                            style: TextStyle(
+                                              color: Colors.white30,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   )
                                 ],
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            print('CLiquer Iciic');
-                          }),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      FlatButton(
-                          child: Row(
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                child: Image(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage('assets/cover2.jpg'),
-                                  width: 90.0,
-                                  height: 120.0,
-                                ),
                               ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Wrap(
-                                direction: Axis.vertical,
-                                children: <Widget>[
-                                  Text(
-                                    "An Ocean of Minutes",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 21,
-                                        fontFamily: 'playFair'),
-                                  ),
-                                  Text(
-                                    "THEA LIM",
-                                    style: TextStyle(
-                                        color: Colors.white30,
-                                        fontFamily: 'Sen'),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        "19.99 e",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.yellow,
-                                      ),
-                                      Text(
-                                        " 4.8",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      Text(
-                                        "  (1256)",
-                                        style: TextStyle(
-                                          color: Colors.white30,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            print('CLiquer22 Iciic');
-                          }),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      FlatButton(
-                          child: Row(
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                child: Image(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage('assets/cover2.jpg'),
-                                  width: 90.0,
-                                  height: 120.0,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Wrap(
-                                direction: Axis.vertical,
-                                children: <Widget>[
-                                  Text(
-                                    "An Ocean of Minutes",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 21,
-                                        fontFamily: 'playFair'),
-                                  ),
-                                  Text(
-                                    "THEA LIM",
-                                    style: TextStyle(
-                                        color: Colors.white30,
-                                        fontFamily: 'Sen'),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        "19.99 e",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.yellow,
-                                      ),
-                                      Text(
-                                        " 4.8",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      Text(
-                                        "  (1256)",
-                                        style: TextStyle(
-                                          color: Colors.white30,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            print('CLiquer Iciic');
-                          }),
-                    ],
-                  ))
+                              onPressed: () {
+                                print("HOLALLALAL");
+                              },
+                            ),
+                            SizedBox(
+                              height: 16,
+                            )
+                          ],
+                        );
+                      },
+                      itemCount: bookList.length,
+                    ),
+                  )
                 ],
               ),
             )),

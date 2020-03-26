@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'BooksPage.dart';
+import 'package:qissa_app/BooksPage.dart';
+import 'BooksPage.dart';
 import 'Ebook.dart';
-import 'book1.dart';
+import 'Book.dart';
 
-final List<book> booksList = Util.Books();
+final List<Book> booksList = Util.Books();
 
 void main() {
   var title = "yacine";
@@ -12,7 +14,7 @@ void main() {
   runApp(
     new MaterialApp(
       title: "Make it rain",
-      home: new Ebook(),
+      home: new CarouselDemo(),
     ),
   );
 }

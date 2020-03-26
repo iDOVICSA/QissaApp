@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'book1.dart';
+import 'Book.dart';
 import 'main.dart';
 
 class Ebook extends StatefulWidget {
@@ -67,7 +67,7 @@ class EbookState extends State<Ebook> {
               ),
             ),
             Text(
-              "${booksList[_current].Auteur}",
+              "${booksList[_current].auteur}",
               style: new TextStyle(
                   fontSize: 20.9,
                   color: Colors.grey[400],
@@ -182,12 +182,12 @@ class EbookState extends State<Ebook> {
 }
 
 class Util {
-  static List<book> Books() {
+  static List<Book> Books() {
     // print("zzzzzzzzzzzzzzzzzzzzzzzzz");
-    book b1 = new book("Rudyard kipling", "The Jungle Book", 19.99, 4.8, 2390,
+    Book b1 = new Book("Rudyard kipling", "The Jungle Book", 19.99, 4.8, 2390,
         'images/junglebook.jpg');
 
-    book b2 = new book(
+    Book b2 = new Book(
       "J.R.R tolkeien",
       "The Hobbit",
       32.99,
@@ -195,9 +195,9 @@ class Util {
       8302,
       'images/hobbit.jpg',
     );
-    book b3 = new book("J.K Rowling", "Harry Potter", 78.99, 7.3, 6732,
+    Book b3 = new Book("J.K Rowling", "Harry Potter", 78.99, 7.3, 6732,
         'images/harrypotter.jpg');
-    book b4 = new book(
+    Book b4 = new Book(
       "Junot Diaz",
       "The sun , moon , stars",
       47.99,
@@ -205,7 +205,7 @@ class Util {
       32,
       'images/stars.png',
     );
-    book b5 = new book(
+    Book b5 = new Book(
       "Stasia Chergui",
       "Taboo",
       83.99,
@@ -213,9 +213,9 @@ class Util {
       478,
       'images/taboo.PNG',
     );
-    book b6 = new book("Tom Angelegebra", "Star Wars", 19.99, 4.8, 2390,
+    Book b6 = new Book("Tom Angelegebra", "Star Wars", 19.99, 4.8, 2390,
         'images/starwars.jpg');
-    List<book> l = List<book>();
+    List<Book> l = List<Book>();
 
     l.add(b1);
     l.add(b2);

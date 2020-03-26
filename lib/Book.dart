@@ -1,24 +1,11 @@
-import 'dart:core';
-import 'package:flutter/cupertino.dart';
-
 class Book {
-  String title;
-  String author;
-  String downloadLink;
-  String publisher;
-  String publishingYear;
-  String summarize;
+  double mark;
+  int views;
+  double price;
+  String titre;
+  String auteur;
   String imgLink;
-
-  void sayHello() {
-    print("hee");
-  }
-
-  void setAuthor(String author) {
-    this.author = author;
-  }
-
-  void setimgLink(String imgLink) {
-    this.imgLink = imgLink;
-  }
+  @override
+  Book(
+      this.auteur, this.titre, this.price, this.mark, this.views, this.imgLink);
 }
