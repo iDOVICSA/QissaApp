@@ -1,0 +1,59 @@
+/*  CarouselSlider(
+                    height: 300.0,
+                    initialPage: 0,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _current = index;
+                      });
+                    },
+                    items: imgList.map((imgUrl) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: 200,
+                            margin: EdgeInsets.symmetric(horizontal: 10.0),
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: Image.asset(imgUrl, fit: BoxFit.fill),
+                          );
+                        },
+                      );
+                    }).toList()),*/
+                
+
+                /*
+                 Row(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 16,
+                      ),
+                      ClipRRect(
+                        borderRadius: new BorderRadius.circular(10.0),
+                        child: Image(
+                          fit: BoxFit.fill,
+                          image: AssetImage('assets/cover2.jpg'),
+                          width: 90.0,
+                          height: 120.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        'Best Seller',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Sen',
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  )
+                
+                */

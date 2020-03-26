@@ -1,7 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './BooksPage.dart';
 
+import 'Ebook.dart';
 
 void main() {
-  runApp(CarouselDemo());
+  var title = "yacine";
+
+  runApp(
+    new MaterialApp(
+      title: "Make it rain",
+      home: new Ebook(),
+    ),
+  );
 }
