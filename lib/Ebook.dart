@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'book1.dart';
+import 'main.dart';
 
 class Ebook extends StatefulWidget {
   @override
@@ -12,7 +13,6 @@ class Ebook extends StatefulWidget {
 
 class EbookState extends State<Ebook> {
   //final TextEditingController _useController = new TextEditingController();
-  List<book> booksList = Util.Books();
   List<String> imgList = List<String>();
 
   int _current = 0;
@@ -20,6 +20,7 @@ class EbookState extends State<Ebook> {
   double mark = 4.8;
   int views = 2390;
   double price = 19.99;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

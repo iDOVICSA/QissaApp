@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Ebook.dart';
+import 'book1.dart';
+
+final List<book> booksList = Util.Books();
 
 void main() {
   var title = "yacine";
