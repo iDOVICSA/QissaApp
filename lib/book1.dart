@@ -6,7 +6,7 @@ class book {
   String titre;
   String Auteur;
   String imgLink;
-
+  @override
   book(
       this.Auteur, this.titre, this.price, this.mark, this.views, this.imgLink);
 }

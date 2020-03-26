@@ -23,157 +23,159 @@ class EbookState extends State<Ebook> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: Container(
-          color: Color(0xFF100b20),
-          child: new Column(
-            children: <Widget>[
-              //    new Padding(padding: new EdgeInsets.all(15.3)),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.close),
-                    color: Colors.white,
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.shopping_cart),
-                    color: Colors.white,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              new Padding(padding: new EdgeInsets.all(8.3)),
-              ClipRRect(
-                borderRadius: new BorderRadius.circular(10.0),
-                child: Image(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    booksList[_current].imgLink,
-                  ),
-                  width: 180.0,
-                  height: 220.0,
-                ),
-              ),
-              Padding(padding: new EdgeInsets.all(12.3)),
-              Text(
-                "${booksList[_current].titre}",
-                style: new TextStyle(
-                  fontSize: 35.9,
+      backgroundColor: Color(0xFF100b20),
+      body: SingleChildScrollView(
+        child: Container(
+            child: new Column(
+          children: <Widget>[
+            new Padding(padding: new EdgeInsets.all(15.3)),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.close),
                   color: Colors.white,
-                  fontWeight: FontWeight.w400,
+                  onPressed: () {},
                 ),
+                IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  color: Colors.white,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            new Padding(padding: new EdgeInsets.all(8.3)),
+            ClipRRect(
+              borderRadius: new BorderRadius.circular(10.0),
+              child: Image(
+                fit: BoxFit.fill,
+                image: AssetImage(
+                  booksList[_current].imgLink,
+                ),
+                width: 180.0,
+                height: 220.0,
               ),
-              Text(
-                "${booksList[_current].Auteur}",
-                style: new TextStyle(
-                    fontSize: 20.9,
-                    color: Colors.grey[400],
-                    fontFamily: 'Raleway'),
+            ),
+            Padding(padding: new EdgeInsets.all(12.3)),
+            Text(
+              "${booksList[_current].titre}",
+              style: new TextStyle(
+                fontSize: 35.9,
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
               ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.star),
-                    color: Colors.yellow,
-                    onPressed: () {
-                      // print(books[0]);
-                    },
-                  ),
-                  Text(
-                    "${booksList[_current].mark} ",
-                    style: new TextStyle(fontSize: 15.9, color: Colors.white),
-                  ),
-                  Text(
-                    "(${booksList[_current].views})",
-                    style: new TextStyle(
-                      fontSize: 15.9,
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                ],
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  //   new Text('                 '),
-                  new RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15.0),
-                        bottomLeft: Radius.circular(15.0),
-                        //topRight: Radius.circular(15.0)
-                      ),
-                    ),
-                    color: Colors.white,
-                    onPressed: () => {print(booksList[0].mark)},
-                    child: new Text(
-                      "${booksList[_current].price}\$",
-                      style: new TextStyle(fontSize: 20.9, color: Colors.black),
-                    ),
-                  ),
-                  new RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15.0),
-                        bottomRight: Radius.circular(15.0),
-                        //topRight: Radius.circular(15.0)
-                      ),
-                    ),
-                    color: Color(0xFFef8262),
-                    textColor: Colors.white,
-                    onPressed: () => {},
-                    child: new Text(
-                      "Free Preview",
-                      style: new TextStyle(fontSize: 20.9),
-                    ),
-                  ),
-                ],
-              ),
-              new Padding(padding: new EdgeInsets.all(8.3)),
-
-              // new Padding(padding: new EdgeInsets.all(30.3)),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    "  You can also like",
-                    style: new TextStyle(fontSize: 15.9, color: Colors.white),
-                  ),
-                ],
-              ),
-              new Container(
-                height: 120.0,
-
-                // color: Colors.black,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return new Card(
-                      margin: EdgeInsets.all(8),
-                      color: Color(0xFF100b20),
-                      child: InkWell(
-                        child: Image.asset(
-                          booksList[index].imgLink,
-                          //    color: Colors.black,
-                          width: 80.0,
-                          height: 120.0,
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _current = index;
-                          });
-                          print(index);
-                        },
-                      ),
-                    );
+            ),
+            Text(
+              "${booksList[_current].Auteur}",
+              style: new TextStyle(
+                  fontSize: 20.9,
+                  color: Colors.grey[400],
+                  fontFamily: 'Raleway'),
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.star),
+                  color: Colors.yellow,
+                  onPressed: () {
+                    // print(books[0]);
                   },
-                  itemCount: booksList.length,
                 ),
+                Text(
+                  "${booksList[_current].mark} ",
+                  style: new TextStyle(fontSize: 15.9, color: Colors.white),
+                ),
+                Text(
+                  "(${booksList[_current].views})",
+                  style: new TextStyle(
+                    fontSize: 15.9,
+                    color: Colors.grey[400],
+                  ),
+                ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                //   new Text('                 '),
+                new RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15.0),
+                      bottomLeft: Radius.circular(15.0),
+                      //topRight: Radius.circular(15.0)
+                    ),
+                  ),
+                  color: Colors.white,
+                  onPressed: () => {print(booksList[0].mark)},
+                  child: new Text(
+                    "${booksList[_current].price}\$",
+                    style: new TextStyle(fontSize: 20.9, color: Colors.black),
+                  ),
+                ),
+                new RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15.0),
+                      bottomRight: Radius.circular(15.0),
+                      //topRight: Radius.circular(15.0)
+                    ),
+                  ),
+                  color: Color(0xFFef8262),
+                  textColor: Colors.white,
+                  onPressed: () => {},
+                  child: new Text(
+                    "Free Preview",
+                    style: new TextStyle(fontSize: 20.9),
+                  ),
+                ),
+              ],
+            ),
+            new Padding(padding: new EdgeInsets.all(8.3)),
+
+            // new Padding(padding: new EdgeInsets.all(30.3)),
+            Row(
+              children: <Widget>[
+                new Text(
+                  "  You can also like",
+                  style: new TextStyle(fontSize: 15.9, color: Colors.white),
+                ),
+              ],
+            ),
+            new Container(
+              height: 120.0,
+
+              // color: Colors.black,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return new Card(
+                    margin: EdgeInsets.all(8),
+                    color: Color(0xFF100b20),
+                    child: InkWell(
+                      child: Image.asset(
+                        booksList[index].imgLink,
+                        //    color: Colors.black,
+                        width: 80.0,
+                        height: 120.0,
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _current = index;
+                        });
+                        print(index);
+                      },
+                    ),
+                  );
+                },
+                itemCount: booksList.length,
               ),
-            ],
-          )),
+            ),
+          ],
+        )),
+      ),
     );
   }
 }
