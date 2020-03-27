@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:qissa_app/Book.dart';
+import 'package:qissa_app/Ebook.dart';
+
+import 'main.dart';
 
 class CarouselDemo extends StatefulWidget {
   CarouselDemo() : super();
@@ -211,7 +214,12 @@ class CarouselDemoState extends State<CarouselDemo> {
                                 ],
                               ),
                               onPressed: () {
-                                print("HOLALLALAL");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Ebook(bookList[indice])),
+                                );
                               },
                             ),
                             SizedBox(

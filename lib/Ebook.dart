@@ -2,12 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Book.dart';
+import 'BooksPage.dart';
 import 'main.dart';
 
 class Ebook extends StatefulWidget {
+  final Book bookToShow;
+  Ebook(this.bookToShow);
+
   @override
   State<StatefulWidget> createState() {
-    return EbookState();
+    return EbookState(bookToShow);
   }
 }
 
@@ -16,10 +20,9 @@ class EbookState extends State<Ebook> {
   List<String> imgList = List<String>();
 
   int _current = 0;
+  Book _currentBookShow;
 
-  double mark = 4.8;
-  int views = 2390;
-  double price = 19.99;
+  EbookState(this._currentBookShow);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,12 @@ class EbookState extends State<Ebook> {
                 IconButton(
                   icon: Icon(Icons.close),
                   color: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CarouselDemo()),
+                    );
+                  },
                 ),
                 IconButton(
                   icon: Icon(Icons.shopping_cart),
@@ -51,7 +59,7 @@ class EbookState extends State<Ebook> {
               child: Image(
                 fit: BoxFit.fill,
                 image: AssetImage(
-                  booksList[_current].imgLink,
+                  _currentBookShow.imgLink,
                 ),
                 width: 180.0,
                 height: 220.0,
@@ -59,7 +67,7 @@ class EbookState extends State<Ebook> {
             ),
             Padding(padding: new EdgeInsets.all(12.3)),
             Text(
-              "${booksList[_current].titre}",
+              "${_currentBookShow.titre}",
               style: new TextStyle(
                 fontSize: 35.9,
                 color: Colors.white,
@@ -67,7 +75,7 @@ class EbookState extends State<Ebook> {
               ),
             ),
             Text(
-              "${booksList[_current].auteur}",
+              "${_currentBookShow.auteur}",
               style: new TextStyle(
                   fontSize: 20.9,
                   color: Colors.grey[400],
@@ -84,11 +92,11 @@ class EbookState extends State<Ebook> {
                   },
                 ),
                 Text(
-                  "${booksList[_current].mark} ",
+                  "${_currentBookShow.mark} ",
                   style: new TextStyle(fontSize: 15.9, color: Colors.white),
                 ),
                 Text(
-                  "(${booksList[_current].views})",
+                  "(${_currentBookShow.views})",
                   style: new TextStyle(
                     fontSize: 15.9,
                     color: Colors.grey[400],
@@ -112,7 +120,7 @@ class EbookState extends State<Ebook> {
                   color: Colors.white,
                   onPressed: () => {print(booksList[0].mark)},
                   child: new Text(
-                    "${booksList[_current].price}\$",
+                    "${_currentBookShow.price}\$",
                     style: new TextStyle(fontSize: 20.9, color: Colors.black),
                   ),
                 ),
@@ -165,6 +173,7 @@ class EbookState extends State<Ebook> {
                       onTap: () {
                         setState(() {
                           _current = index;
+                          _currentBookShow = booksList[index];
                         });
                         print(index);
                       },
