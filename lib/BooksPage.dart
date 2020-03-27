@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:qissa_app/Book.dart';
-import 'package:qissa_app/Ebook.dart';
 
-import 'main.dart';
+import 'Ebook.dart';
 
 class CarouselDemo extends StatefulWidget {
   CarouselDemo() : super();
@@ -15,6 +14,8 @@ class CarouselDemo extends StatefulWidget {
 }
 
 class CarouselDemoState extends State<CarouselDemo> {
+  final GlobalKey _scaffoldKey = new GlobalKey();
+
   int currentElementInListView = 0;
   int _current = 0;
   List imgList = [];
@@ -50,190 +51,246 @@ class CarouselDemoState extends State<CarouselDemo> {
   Widget build(BuildContext context) {
     initImgList();
     initBooksLIst();
-
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-            backgroundColor: Color(0xFF100b20),
-            body: Container(
-              child: new Column(
-                children: <Widget>[
-                  new Padding(padding: new EdgeInsets.fromLTRB(0, 0, 0, 0)),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
+          backgroundColor: Color(0xFF100b20),
+          drawer: NavDrawer(),
+          body: Container(
+            child: new Column(
+              children: <Widget>[
+                new Padding(padding: new EdgeInsets.fromLTRB(0, 0, 0, 0)),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Builder(
+                      builder: (context) => IconButton(
                         icon: Icon(Icons.menu),
                         color: Colors.white,
-                        onPressed: () {},
+                        onPressed: () => Scaffold.of(context).openDrawer(),
                       ),
-                      IconButton(
-                        icon: Icon(Icons.search),
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                  new SizedBox(
-                    height: 21,
-                  ),
-                  new Row(
-                    children: <Widget>[
-                      Expanded(
-                          child: CarouselSlider(
-                              initialPage: 0,
-                              height: 250,
-                              onPageChanged: (index) {
-                                setState(() {
-                                  _current = index;
-                                });
-                              },
-                              items: imgList.map((imgUrl) {
-                                return Builder(
-                                  builder: (BuildContext context) {
-                                    return Container(
-                                      child: FlatButton(
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              new BorderRadius.circular(10.0),
-                                          child: Image(
-                                            fit: BoxFit.fill,
-                                            image: AssetImage(imgUrl),
-                                            width: 180.0,
-                                            height: 250.0,
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.search),
+                      color: Colors.white,
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                new SizedBox(
+                  height: 21,
+                ),
+                new Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: CarouselSlider(
+                            initialPage: 0,
+                            height: 250,
+                            onPageChanged: (index) {
+                              setState(() {
+                                _current = index;
+                              });
+                            },
+                            items: imgList.map((imgUrl) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    child: FlatButton(
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            new BorderRadius.circular(10.0),
+                                        child: Image(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(imgUrl),
+                                          width: 180.0,
+                                          height: 250.0,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        print("Holaa amigo ");
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+                            }).toList())),
+                  ],
+                ),
+                new SizedBox(
+                  height: 21,
+                ),
+                Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      'Best Seller',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Sen',
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, indice) {
+                      return new Column(
+                        children: <Widget>[
+                          FlatButton(
+                            child: new Row(
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: new BorderRadius.circular(10.0),
+                                  child: Image(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(bookList[indice].imgLink),
+                                    width: 90.0,
+                                    height: 120.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                Wrap(
+                                  direction: Axis.vertical,
+                                  children: <Widget>[
+                                    Text(
+                                      bookList[indice].titre,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 21,
+                                          fontFamily: 'playFair'),
+                                    ),
+                                    Text(
+                                      bookList[indice].auteur,
+                                      style: TextStyle(
+                                          color: Colors.white30,
+                                          fontFamily: 'Sen'),
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          bookList[indice].price.toString() +
+                                              " e",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                        SizedBox(
+                                          width: 40,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.yellow,
+                                        ),
+                                        Text(
+                                          bookList[indice].mark.toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
                                           ),
                                         ),
-                                        onPressed: () {
-                                          print("Holaa amigo ");
-                                        },
-                                      ),
-                                    );
-                                  },
-                                );
-                              }).toList())),
-                    ],
-                  ),
-                  new SizedBox(
-                    height: 21,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        'Best Seller',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Sen',
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, indice) {
-                        return new Column(
-                          children: <Widget>[
-                            FlatButton(
-                              child: new Row(
-                                children: <Widget>[
-                                  ClipRRect(
-                                    borderRadius:
-                                        new BorderRadius.circular(10.0),
-                                    child: Image(
-                                      fit: BoxFit.fill,
-                                      image:
-                                          AssetImage(bookList[indice].imgLink),
-                                      width: 90.0,
-                                      height: 120.0,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
-                                  Wrap(
-                                    direction: Axis.vertical,
-                                    children: <Widget>[
-                                      Text(
-                                        bookList[indice].titre,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 21,
-                                            fontFamily: 'playFair'),
-                                      ),
-                                      Text(
-                                        bookList[indice].auteur,
-                                        style: TextStyle(
+                                        Text(
+                                          "  " +
+                                              bookList[indice].views.toString(),
+                                          style: TextStyle(
                                             color: Colors.white30,
-                                            fontFamily: 'Sen'),
-                                      ),
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            bookList[indice].price.toString() +
-                                                " e",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18),
+                                            fontSize: 16,
                                           ),
-                                          SizedBox(
-                                            width: 40,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            color: Colors.yellow,
-                                          ),
-                                          Text(
-                                            bookList[indice].mark.toString(),
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          Text(
-                                            "  " +
-                                                bookList[indice]
-                                                    .views
-                                                    .toString(),
-                                            style: TextStyle(
-                                              color: Colors.white30,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Ebook(bookList[indice])),
-                                );
-                              },
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
                             ),
-                            SizedBox(
-                              height: 16,
-                            )
-                          ],
-                        );
-                      },
-                      itemCount: bookList.length,
-                    ),
-                  )
-                ],
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Ebook(bookList[indice])),
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: 16,
+                          )
+                        ],
+                      );
+                    },
+                    itemCount: bookList.length,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NavDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          Container(
+            height: 200,
+            width: 150,
+            child: DrawerHeader(
+              child: Image(
+                image: AssetImage(
+                  './images/logo.png',
+                ),
               ),
-            )),
+              decoration: BoxDecoration(
+                  color: Color(0xFF100b20),
+                  image: DecorationImage(image: AssetImage('images/face.jpg'))),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.input),
+            title: Text('Welcome'),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: Icon(Icons.verified_user),
+            title: Text('Profile'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.favorite_border),
+            title: Text('Favorite'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.settings_applications),
+            title: Text('Settings'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.feedback),
+            title: Text('Feedback'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+        ],
       ),
     );
   }
