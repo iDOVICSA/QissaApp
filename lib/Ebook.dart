@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'AudioBook.dart';
 import 'Book.dart';
 import 'BooksPage.dart';
 import 'main.dart';
@@ -134,7 +135,13 @@ class EbookState extends State<Ebook> {
                   ),
                   color: Color(0xFFef8262),
                   textColor: Colors.white,
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AudioBook(_currentBookShow)),
+                    ),
+                  },
                   child: new Text(
                     "Free Preview",
                     style: new TextStyle(fontSize: 20.9),
