@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qissa_app/FavouriteBooks.dart';
 import 'AudioBook.dart';
 import 'BooksPage.dart';
 import 'package:qissa_app/BooksPage.dart';
@@ -15,7 +16,7 @@ void main() {
   runApp(
     new MaterialApp(
       title: "Make it rain",
-      home: new CarouselDemo(),
+      home: new FavouriteBooks(),
     ),
   );
 }
