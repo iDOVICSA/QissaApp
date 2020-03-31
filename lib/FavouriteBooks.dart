@@ -53,6 +53,8 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
 
   @override
   Widget build(BuildContext context) {
+    var _bookcolor;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -63,6 +65,9 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
             ),
             Center(
               child: ToggleButtons(
+                borderWidth: 20,
+                //borderWidth: 2,
+
                 children: <Widget>[
                   Text(
                     "Books",
@@ -75,6 +80,7 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
                 ],
                 renderBorder: false,
                 color: Color(0xFF100b20),
+                // borderWidth: 90,
                 borderRadius: BorderRadius.circular(50),
                 onPressed: (int index) {
                   print("i got pressed $index");
@@ -134,23 +140,59 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
                     hintText: "What are you looking for"),
               ),
             ),
+            new Padding(padding: new EdgeInsets.all(15.3)),
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return Row(
-                    children: <Widget>[
-                      Image.asset(
-                        booksList[index].imgLink,
-                        width: 80,
-                        height: 100,
-                      ),
-                      Image.asset(
-                        booksList[index + 1].imgLink,
-                        width: 80,
-                        height: 100,
-                      ),
-                    ],
+                  return Container(
+                    color: Colors.grey[100],
+                    child: Column(
+                      children: <Widget>[
+                        new Padding(padding: new EdgeInsets.all(3.6)),
+                        Wrap(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            InkWell(
+                              child: ClipRRect(
+                                borderRadius: new BorderRadius.circular(10.0),
+                                child: Image(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                    booksList[index].imgLink,
+                                  ),
+                                  width: 130.0,
+                                  height: 160.0,
+                                ),
+                              ),
+                              onTap: () {
+                                print(index);
+                              },
+                            ),
+                            new Padding(padding: new EdgeInsets.all(15.3)),
+                            InkWell(
+                              child: ClipRRect(
+                                borderRadius: new BorderRadius.circular(10.0),
+                                child: Image(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                    booksList[booksList.length - 1 - index]
+                                        .imgLink,
+                                  ),
+                                  width: 130.0,
+                                  height: 160.0,
+                                ),
+                              ),
+                              onTap: () {
+                                print(index);
+                              },
+                            ),
+                            new Padding(padding: new EdgeInsets.all(15.3)),
+                          ],
+                        ),
+                        new Padding(padding: new EdgeInsets.all(7.3)),
+                      ],
+                    ),
                   );
                 },
                 itemCount: booksList.length,
