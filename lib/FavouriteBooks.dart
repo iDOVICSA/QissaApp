@@ -70,11 +70,11 @@ class _FavouriteBooksState extends State<FavouriteBooks> {
 
                 children: <Widget>[
                   Text(
-                    "Books",
+                    "        Books        ",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Audio",
+                    "        Audio        ",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
